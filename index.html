@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>100 Câu Điền Từ Đúng Dạng – Vocabulary Units 1–6</title>
+<style>
+  *{box-sizing:border-box}
+  :root{
+    --primary:#4f46e5;
+    --primary-dark:#4338ca;
+    --ok:#16a34a;
+    --no:#dc2626;
+    --rev:#0891b2;
+    --line:#e2e8f0;
+  }
+  body{
+    margin:0;
+    font-family:'Segoe UI',system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    background:#eef2f9;
+    color:#1e293b;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 55%,#a855f7 100%);
+    color:#fff;
+    padding:30px 20px 26px;
+    text-align:center;
+    box-shadow:0 6px 24px rgba(79,70,229,.28);
+  }
+  header h1{
+    margin:0 0 6px;
+    font-size:clamp(1.25rem,3.4vw,1.9rem);
+    letter-spacing:.2px;
+  }
+  header p{
+    margin:0;
+    opacity:.9;
+    font-size:.92rem;
+  }
+
+  /* ---------- TOOLBAR ---------- */
+  .toolbar{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding:10px 16px;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:10px;
+    justify-content:center;
+  }
+  .stat{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:.86rem;
+    font-weight:600;
+    color:#475569;
+    background:#f1f5f9;
+    border-radius:999px;
+    padding:6px 14px;
+  }
+  .stat b{color:var(--primary-dark);font-size:1rem}
+  .progress{
+    flex:1 1 160px;
+    min-width:120px;
+    height:8px;
+    background:#e2e8f0;
+    border-radius:99px;
+    overflow:hidden;
+  }
+  .progress > i{
+    display:block;
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,#6366f1,#a855f7);
+    border-radius:99px;
+    transition:width .3s ease;
+  }
+  button{
+    font:inherit;
+    font-size:.85rem;
+    font-weight:600;
+    border:1px solid transparent;
+    border-radius:10px;
+    padding:8px 14px;
+    cursor:pointer;
+    transition:.15s;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--primary);color:#fff;box-shadow:0 2px 8px rgba(79,70,229,.3)}
+  .btn-primary:hover{background:var(--primary-dark)}
+  .btn-ghost{background:#fff;color:#475569;border-color:#cbd5e1}
+  .btn-ghost:hover{background:#f8fafc;border-color:#94a3b8}
+  .btn-danger{background:#fff;color:#b91c1c;border-color:#fecaca}
+  .btn-danger:hover{background:#fef2f2}
+
+  .switch{
+    display:flex;align-items:center;gap:7px;
+    font-size:.82rem;font-weight:600;color:#475569;
+    background:#f1f5f9;border-radius:999px;padding:6px 14px;cursor:pointer;
+    user-select:none;
+  }
+  .switch input{accent-color:var(--primary);width:16px;height:16px;cursor:pointer}
+
+  /* ---------- QUIZ ---------- */
+  main{max-width:900px;margin:0 auto;padding:22px 14px 80px}
+
+  .part{
+    background:#fff;
+    border-radius:16px;
+    box-shadow:0 2px 12px rgba(15,23,42,.06);
+    margin-bottom:22px;
+    overflow:hidden;
+    border:1px solid #e8edf5;
+  }
+  .part-head{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:14px 18px;
+    background:linear-gradient(90deg,#f8faff,#f1f5ff);
+    border-bottom:1px solid var(--line);
+  }
+  .part-head h2{margin:0;font-size:1rem;color:var(--primary-dark);letter-spacing:.2px}
+  .part-words{margin:2px 0 0;font-size:.78rem;color:#64748b;font-style:italic}
+  .badge{
+    flex-shrink:0;
+    font-size:.8rem;font-weight:700;
+    background:#e0e7ff;color:#3730a3;
+    border-radius:999px;padding:4px 12px;
+  }
+  .badge.full{background:#dcfce7;color:#15803d}
+  .badge.low{background:#fee2e2;color:#b91c1c}
+
+  .q{
+    display:flex;
+    gap:12px;
+    padding:14px 18px;
+    border-bottom:1px solid #f1f5f9;
+    transition:background .2s;
+  }
+  .q:last-child{border-bottom:0}
+  .q:hover{background:#fafbff}
+  .q.hidden{display:none}
+
+  .q-num{
+    flex-shrink:0;
+    width:28px;height:28px;
+    border-radius:8px;
+    background:#f1f5f9;
+    color:#64748b;
+    font-size:.78rem;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    margin-top:2px;
+  }
+  .q.correct .q-num{background:#dcfce7;color:#15803d}
+  .q.wrong .q-num{background:#fee2e2;color:#b91c1c}
+  .q.revealed .q-num{background:#cffafe;color:#0e7490}
+
+  .q-main{flex:1;min-width:0}
+  .q-text{margin:0;font-size:.97rem;color:#1e293b;word-wrap:break-word}
+
+  .blank{
+    font:inherit;
+    font-weight:700;
+    font-size:.95rem;
+    color:var(--primary-dark);
+    border:0;
+    border-bottom:2px dashed #a5b4fc;
+    background:#f8faff;
+    padding:2px 9px;
+    margin:0 3px;
+    width:160px;
+    border-radius:7px 7px 0 0;
+    outline:none;
+    transition:.15s;
+  }
+  .blank::placeholder{color:#c7d2fe;font-weight:500}
+  .blank:focus{border-bottom-color:var(--primary);background:#eef2ff;box-shadow:0 2px 0 0 var(--primary)}
+  .q.correct .blank{border-bottom-color:var(--ok);color:#15803d;background:#f0fdf4}
+  .q.wrong .blank{border-bottom-color:var(--no);color:#b91c1c;background:#fef2f2}
+  .q.revealed .blank{border-bottom-color:var(--rev);color:#0e7490;background:#ecfeff}
+
+  .q-bottom{
+    display:flex;flex-wrap:wrap;align-items:center;gap:10px;
+    margin-top:7px;
+    font-size:.79rem;
+  }
+  .hint{
+    background:#f1f5f9;color:#64748b;
+    border-radius:6px;padding:2px 9px;
+    font-size:.76rem;
+  }
+  .hint b{color:#475569}
+
+  .fb{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+  .ok{color:var(--ok);font-weight:700}
+  .no{color:var(--no);font-weight:600}
+  .no b{color:#991b1b}
+  .rev{color:var(--rev);font-weight:600}
+  .rev b{color:#155e75}
+  .exp{color:#64748b;font-size:.78rem;font-style:italic}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    text-align:center;
+    padding:26px 16px 40px;
+    color:#94a3b8;
+    font-size:.8rem;
+  }
+
+  /* ---------- TOAST ---------- */
+  #toast{
+    position:fixed;
+    left:50%;bottom:26px;
+    transform:translate(-50%,80px);
+    background:#1e293b;color:#fff;
+    padding:11px 22px;border-radius:12px;
+    font-size:.87rem;font-weight:600;
+    box-shadow:0 10px 30px rgba(0,0,0,.28);
+    opacity:0;pointer-events:none;
+    transition:.32s cubic-bezier(.2,.8,.3,1);
+    z-index:99;
+  }
+  #toast.show{opacity:1;transform:translate(-50%,0)}
+
+  @media(max-width:560px){
+    .blank{width:118px;font-size:.9rem}
+    .q{padding:12px 13px;gap:9px}
+    .q-text{font-size:.92rem}
+    .part-head{padding:12px 14px}
+    .toolbar{padding:8px 10px;gap:7px}
+    button{padding:7px 11px;font-size:.8rem}
+    .stat{padding:5px 11px;font-size:.79rem}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📚 100 Câu Điền Từ Đúng Dạng</h1>
+  <p>Vocabulary Units 1–6 · Mixed Word Form &amp; Verb Forms</p>
+</header>
+
+<div class="toolbar">
+  <span class="stat">Đúng <b id="s-correct">0</b>/100</span>
+  <div class="progress"><i id="s-bar"></i></div>
+  <button class="btn-primary" id="btn-check">✓ Kiểm tra tất cả</button>
+  <button class="btn-ghost" id="btn-reveal">👁 Xem đáp án</button>
+  <button class="btn-ghost" id="btn-filter">🔎 Chỉ câu sai</button>
+  <button class="btn-danger" id="btn-reset">↺ Làm lại</button>
+  <label class="switch"><input type="checkbox" id="auto" checked> Tự động kiểm tra</label>
+</div>
+
+<main id="quiz"></main>
+
+<footer>Chúc bạn học tốt! 💪 &nbsp;·&nbsp; Tiến độ được lưu tự động trên trình duyệt.</footer>
+
+<div id="toast"></div>
+
+<script>
+/* =========================================================
+   DỮ LIỆU
+   ========================================================= */
+const PARTS = [
+  {
+    title: "Phần 1 · Câu 1–10",
+    words: "academic · components · transfer · long-term · structure",
+    items: [
+      {s:"______ success requires regular practice and effective study habits.", h:"academic", a:"academic", e:"Cần tính từ bổ nghĩa cho danh từ “success”."},
+      {s:"She is an ______ student who always does extra reading.", h:"academic", a:"academic", e:"Cần tính từ bổ nghĩa cho danh từ “student”."},
+      {s:"The course has several important ______, including reading and speaking.", h:"component", a:"components", e:"Sau “several important” cần danh từ số nhiều."},
+      {s:"Good communication is a key ______ of a successful team.", h:"component", a:"component", e:"Sau “a key” cần danh từ số ít."},
+      {s:"Students can ______ the knowledge they learn in class to real-life situations.", h:"transfer", a:"transfer", e:"Sau “can” dùng động từ nguyên mẫu."},
+      {s:"The money was ______ to his bank account yesterday.", h:"transfer", a:"transferred", e:"Câu bị động: was + V3/ed."},
+      {s:"Reading every day can bring ______ benefits to your language skills.", h:"long-term", a:"long-term", alt:["long term","longterm"], e:"Cần tính từ ghép đứng trước “benefits”."},
+      {s:"We need a ______ solution, not just a quick fix.", h:"long-term", a:"long-term", alt:["long term","longterm"], e:"Cần tính từ đứng trước “solution”."},
+      {s:"Understanding the ______ of an essay helps students organize their ideas.", h:"structure", a:"structure", e:"Sau “the” và trước “of” cần danh từ."},
+      {s:"The building has a modern ______.", h:"structure", a:"structure", e:"Sau tính từ “modern” cần danh từ."}
+    ]
+  },
+  {
+    title: "Phần 2 · Câu 11–20",
+    words: "effective · technique · assess · reform · measure",
+    items: [
+      {s:"Shadowing is an ______ technique for improving English pronunciation.", h:"effect", a:"effective", e:"Cần tính từ đứng trước “technique”."},
+      {s:"The new teaching method proved highly ______.", h:"effect", a:"effective", e:"Sau “proved” (linking verb) cần tính từ."},
+      {s:"The teacher showed us a useful ______ for remembering new vocabulary.", h:"technique", a:"technique", e:"Sau “a useful” cần danh từ số ít."},
+      {s:"Scientists are developing a new ______ to solve the problem.", h:"technique", a:"technique", e:"Sau “a new” cần danh từ số ít."},
+      {s:"Teachers use different activities to ______ students’ speaking abilities.", h:"assess", a:"assess", e:"Sau “to” dùng động từ nguyên mẫu."},
+      {s:"The final test is used to ______ how much students have learned.", h:"assess", a:"assess", e:"Sau “to” dùng động từ nguyên mẫu."},
+      {s:"The education ______ aims to improve the quality of teaching.", h:"reform", a:"reform", e:"Cần danh từ làm chủ ngữ."},
+      {s:"The government promised to ______ the education system.", h:"reform", a:"reform", e:"Sau “to” dùng động từ nguyên mẫu."},
+      {s:"Standardized tests are often used to ______ students’ academic progress.", h:"measure", a:"measure", e:"Sau “to” dùng động từ nguyên mẫu."},
+      {s:"The ______ of success is not only money.", h:"measure", a:"measure", e:"Sau “The” và trước “of” cần danh từ."}
+    ]
+  },
+  {
+    title: "Phần 3 · Câu 21–30",
+    words: "memorize · apply · alternative · debate · unique",
+    items: [
+      {s:"______ new words without understanding them may not be very useful.", h:"memorize", a:"memorizing", e:"V-ing làm chủ ngữ."},
+      {s:"She has difficulty ______ long lists of vocabulary.", h:"memorize", a:"memorizing", e:"Cấu trúc “have difficulty + V-ing”."},
+      {s:"Students should ______ what they learn to practical situations.", h:"apply", a:"apply", e:"Sau “should” dùng động từ nguyên mẫu."},
+      {s:"This rule does not ______ to this case.", h:"apply", a:"apply", e:"Sau “does not” dùng động từ nguyên mẫu."},
+      {s:"Some schools are exploring ______ methods of assessment.", h:"alternative", a:"alternative", e:"Cần tính từ đứng trước “methods”."},
+      {s:"We had no ______ but to cancel the trip.", h:"alternative", a:"alternative", e:"Sau “no” cần danh từ."},
+      {s:"The students had a ______ about whether exams are necessary.", h:"debate", a:"debate", e:"Sau “a” cần danh từ số ít."},
+      {s:"They spent hours ______ the advantages and disadvantages of online learning.", h:"debate", a:"debating", e:"Cấu trúc “spend time + V-ing”."},
+      {s:"Vietnam has a ______ culture with many traditional festivals.", h:"unique", a:"unique", e:"Cần tính từ đứng trước “culture”."},
+      {s:"Each region has its own ______ characteristics.", h:"unique", a:"unique", e:"Cần tính từ đứng trước “characteristics”."}
+    ]
+  },
+  {
+    title: "Phần 4 · Câu 31–40",
+    words: "crafts · accommodation · exhausting · basic · possessions",
+    items: [
+      {s:"Visitors can buy traditional ______ in many Vietnamese villages.", h:"craft", a:"crafts", e:"Sau “traditional” cần danh từ số nhiều."},
+      {s:"She enjoys making ______ such as baskets and pottery.", h:"craft", a:"crafts", e:"Cụm “make crafts” – làm đồ thủ công."},
+      {s:"We booked our ______ near the beach before the trip.", h:"accommodate", a:"accommodation", e:"Danh từ không đếm được, nghĩa “chỗ ở”."},
+      {s:"The hotel offers comfortable ______ for guests.", h:"accommodate", a:"accommodation", e:"Sau tính từ “comfortable” cần danh từ."},
+      {s:"The long journey through the mountains was ______.", h:"exhaust", a:"exhausting", e:"Tính từ miêu tả sự vật gây mệt mỏi."},
+      {s:"After the ______ trip, we slept for ten hours.", h:"exhaust", a:"exhausting", e:"Tính từ đứng trước danh từ “trip”."},
+      {s:"The hotel provides ______ facilities, such as clean rooms and hot water.", h:"basic", a:"basic", e:"Tính từ đứng trước “facilities”."},
+      {s:"You need to understand the ______ rules before playing.", h:"basic", a:"basic", e:"Tính từ đứng trước “rules”."},
+      {s:"Please keep your personal ______ safe while travelling.", h:"possess", a:"possessions", e:"Sau “personal” cần danh từ số nhiều."},
+      {s:"He lost all his ______ in the fire.", h:"possess", a:"possessions", e:"Sau “his” cần danh từ số nhiều."}
+    ]
+  },
+  {
+    title: "Phần 5 · Câu 41–50",
+    words: "fabulous · range · eager · precautions · departure",
+    items: [
+      {s:"We had a ______ time exploring the beautiful beaches of Vũng Tàu.", h:"fabulous", a:"fabulous", e:"Tính từ đứng trước “time”."},
+      {s:"The view from the top was absolutely ______.", h:"fabulous", a:"fabulous", e:"Sau trạng từ “absolutely” cần tính từ."},
+      {s:"The market offers a wide ______ of traditional Vietnamese food.", h:"range", a:"range", e:"Cụm “a wide range of”."},
+      {s:"The shop has a ______ of products for tourists.", h:"range", a:"range", e:"Sau “a” cần danh từ số ít."},
+      {s:"The tourists were ______ to learn more about Vietnamese culture.", h:"eager", a:"eager", e:"Sau “were” cần tính từ."},
+      {s:"She was ______ to start her new job.", h:"eager", a:"eager", e:"Sau “was” cần tính từ."},
+      {s:"Travellers should take ______ to protect themselves from theft.", h:"precaution", a:"precautions", e:"Cụm “take precautions”."},
+      {s:"As a ______, we locked our passports in the hotel safe.", h:"precaution", a:"precaution", e:"Sau “a” cần danh từ số ít."},
+      {s:"Our ______ is scheduled for six o’clock tomorrow morning.", h:"depart", a:"departure", e:"Danh từ làm chủ ngữ."},
+      {s:"The ______ of the flight was delayed by two hours.", h:"depart", a:"departure", e:"Sau “The” và trước “of” cần danh từ."}
+    ]
+  },
+  {
+    title: "Phần 6 · Câu 51–60",
+    words: "expire · vulnerable · purchasing · authorized · assume",
+    items: [
+      {s:"Make sure your passport does not ______ before your trip.", h:"expire", a:"expire", e:"Sau “does not” dùng động từ nguyên mẫu."},
+      {s:"My visa will ______ next month.", h:"expire", a:"expire", e:"Sau “will” dùng động từ nguyên mẫu."},
+      {s:"Tourists may be ______ to scams in unfamiliar places.", h:"vulnerable", a:"vulnerable", e:"Sau “be” cần tính từ."},
+      {s:"Young children are especially ______ to illness.", h:"vulnerable", a:"vulnerable", e:"Sau “especially” cần tính từ."},
+      {s:"______ travel insurance can provide extra protection during a trip.", h:"purchase", a:"purchasing", e:"V-ing làm chủ ngữ."},
+      {s:"She is considering ______ a new laptop.", h:"purchase", a:"purchasing", e:"Sau “consider” dùng V-ing."},
+      {s:"Only ______ travel agents can issue certain official documents.", h:"authorize", a:"authorized", e:"Tính từ đứng trước “travel agents”."},
+      {s:"You need to be ______ to enter the restricted area.", h:"authorize", a:"authorized", e:"Sau “be” cần tính từ / V3."},
+      {s:"Do not ______ that everyone you meet is trustworthy.", h:"assume", a:"assume", e:"Sau “Do not” dùng động từ nguyên mẫu."},
+      {s:"We cannot ______ anything without evidence.", h:"assume", a:"assume", e:"Sau “cannot” dùng động từ nguyên mẫu."}
+    ]
+  },
+  {
+    title: "Phần 7 · Câu 61–70",
+    words: "sincere · directors · credits · crucial · transform",
+    items: [
+      {s:"The hotel staff gave us a ______ welcome.", h:"sincere", a:"sincere", e:"Tính từ đứng trước “welcome”."},
+      {s:"She expressed her thanks in a ______ way.", h:"sincere", a:"sincere", e:"Tính từ đứng trước “way”."},
+      {s:"The ______ worked closely with the actors to create the film.", h:"director", a:"directors", e:"Danh từ số nhiều làm chủ ngữ."},
+      {s:"One of the ______ won an award for the movie.", h:"director", a:"directors", e:"Cấu trúc “one of the + danh từ số nhiều”."},
+      {s:"We stayed until the end of the movie to watch the ______.", h:"credit", a:"credits", e:"Danh từ số nhiều: phần giới thiệu đoàn làm phim."},
+      {s:"The ______ listed all the people involved in the production.", h:"credit", a:"credits", e:"Danh từ số nhiều làm chủ ngữ."},
+      {s:"Good communication is ______ to the success of a film project.", h:"crucial", a:"crucial", e:"Sau “is” cần tính từ."},
+      {s:"Timing is ______ in comedy.", h:"crucial", a:"crucial", e:"Sau “is” cần tính từ."},
+      {s:"Makeup and costumes can ______ an actor into a completely different character.", h:"transform", a:"transform", e:"Sau “can” dùng động từ nguyên mẫu."},
+      {s:"The old factory was ______ into a modern art museum.", h:"transform", a:"transformed", e:"Câu bị động: was + V3/ed."}
+    ]
+  },
+  {
+    title: "Phần 8 · Câu 71–80",
+    words: "scene · production · exclusively · studios · ambition",
+    items: [
+      {s:"The final ______ of the movie was filmed at sunset.", h:"scene", a:"scene", e:"Sau “final” cần danh từ số ít."},
+      {s:"Police arrived at the ______ of the accident.", h:"scene", a:"scene", e:"Cụm “at the scene of the accident”."},
+      {s:"The film ______ lasted almost six months.", h:"produce", a:"production", e:"Danh từ làm chủ ngữ."},
+      {s:"This car is in ______ now.", h:"produce", a:"production", e:"Cụm “in production” – đang trong quá trình sản xuất."},
+      {s:"The interview was filmed ______ for the television channel.", h:"exclusive", a:"exclusively", e:"Trạng từ bổ nghĩa cho “filmed”."},
+      {s:"This offer is available ______ to members.", h:"exclusive", a:"exclusively", e:"Trạng từ bổ nghĩa cho “available”."},
+      {s:"Many famous movies are made in large film ______.", h:"studio", a:"studios", e:"Sau “film” cần danh từ số nhiều."},
+      {s:"The film was shot in two different ______.", h:"studio", a:"studios", e:"Sau “two different” cần danh từ số nhiều."},
+      {s:"His ______ was to become a successful film director.", h:"ambition", a:"ambition", e:"Sau “His” cần danh từ."},
+      {s:"She has the ______ to lead a large company.", h:"ambition", a:"ambition", e:"Sau “the” cần danh từ."}
+    ]
+  },
+  {
+    title: "Phần 9 · Câu 81–90",
+    words: "passion · debut · influential · preserve · represents",
+    items: [
+      {s:"Her ______ for storytelling inspired her to study filmmaking.", h:"passion", a:"passion", e:"Sau “Her” cần danh từ."},
+      {s:"He spoke with great ______ about his new project.", h:"passion", a:"passion", e:"Sau “great” cần danh từ."},
+      {s:"The young director made his ______ with a short independent film.", h:"debut", a:"debut", e:"Sau “his” cần danh từ."},
+      {s:"The singer will ______ her new album next month.", h:"debut", a:"debut", e:"Sau “will” dùng động từ nguyên mẫu."},
+      {s:"He became one of the most ______ filmmakers of his generation.", h:"influence", a:"influential", e:"Tính từ đứng trước “filmmakers”."},
+      {s:"Her teacher was a highly ______ person in her life.", h:"influence", a:"influential", e:"Tính từ đứng trước “person”."},
+      {s:"The film aims to ______ important stories from the past.", h:"preserve", a:"preserve", e:"Sau “to” dùng động từ nguyên mẫu."},
+      {s:"We must ______ these old traditions for future generations.", h:"preserve", a:"preserve", e:"Sau “must” dùng động từ nguyên mẫu."},
+      {s:"The film ______ the director’s passion for science fiction.", h:"represent", a:"represents", e:"Chủ ngữ số ít “The film” → thêm -s."},
+      {s:"This statue ______ freedom and peace.", h:"represent", a:"represents", e:"Chủ ngữ số ít “This statue” → thêm -s."}
+    ]
+  },
+  {
+    title: "Phần 10 · Câu 91–100",
+    words: "metaphor · inspiration · alternative · exclusively · precautions · structure · passion · scene",
+    items: [
+      {s:"The journey in the movie is a ______ for personal growth.", h:"metaphor", a:"metaphor", e:"Sau “a” cần danh từ số ít."},
+      {s:"The writer used a powerful ______ to describe love.", h:"metaphor", a:"metaphor", e:"Sau “a powerful” cần danh từ."},
+      {s:"His childhood experiences became a major source of ______ for his films.", h:"inspire", a:"inspiration", e:"Cụm “a source of inspiration”."},
+      {s:"The teacher’s encouragement gave me ______ to continue.", h:"inspire", a:"inspiration", e:"Sau “gave me” cần danh từ."},
+      {s:"Online courses offer an ______ to traditional classroom learning.", h:"alternative", a:"alternative", e:"Sau “an” cần danh từ số ít."},
+      {s:"The documentary was produced ______ for streaming services.", h:"exclusive", a:"exclusively", e:"Trạng từ bổ nghĩa cho “produced”."},
+      {s:"We need to take safety ______ before the trip.", h:"precaution", a:"precautions", e:"Cụm “safety precautions”."},
+      {s:"The ______ of the building is very complex.", h:"structure", a:"structure", e:"Sau “The” cần danh từ."},
+      {s:"Her ______ for music began when she was a child.", h:"passion", a:"passion", e:"Sau “Her” cần danh từ."},
+      {s:"The movie’s final ______ made many people cry.", h:"scene", a:"scene", e:"Sau “final” cần danh từ số ít."}
+    ]
+  }
+];
+
+/* =========================================================
+   KHỞI TẠO
+   ========================================================= */
+const FLAT = [];
+PARTS.forEach((p, pi) => p.items.forEach(it => FLAT.push({ ...it, part: pi })));
+const N = FLAT.length;
+const KEY = 'vocab100_state_v1';
+
+let state = FLAT.map(() => ({ v: '', st: 'idle' }));
+let filterWrong = false;
+
+/* ---------- helpers ---------- */
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const escAttr = s => esc(s).replace(/"/g,'&quot;');
+const norm = s => String(s).trim().toLowerCase()
+                   .replace(/[’‘`´]/g,"'")
+                   .replace(/\s+/g,' ');
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+function render(){
+  const wrap = document.getElementById('quiz');
+  wrap.innerHTML = '';
+  let idx = 0;
+
+  PARTS.forEach((part, pi) => {
+    const sec = document.createElement('section');
+    sec.className = 'part';
+
+    const head = document.createElement('div');
+    head.className = 'part-head';
+    head.innerHTML =
+      `<div><h2>${esc(part.title)}</h2><p class="part-words">${esc(part.words)}</p></div>
+       <span class="badge" id="pb-${pi}">0/${part.items.length}</span>`;
+    sec.appendChild(head);
+
+    part.items.forEach(() => {
+      const i = idx++;
+      sec.appendChild(buildQ(i));
+    });
+    wrap.appendChild(sec);
+  });
+
+  refreshStats();
+}
+
+function buildQ(i){
+  const item = FLAT[i];
+  const st   = state[i];
+  const seg  = item.s.split('______');
+  const before = seg[0] || '';
+  const after  = seg[1] || '';
+
+  const el = document.createElement('div');
+  el.className = 'q';
+  el.id = 'q' + i;
+  el.dataset.i = i;
+
+  el.innerHTML =
+    `<div class="q-num">${i + 1}</div>
+     <div class="q-main">
+       <p class="q-text">${esc(before)}<input class="blank" type="text"
+            data-i="${i}" autocomplete="off" autocapitalize="off"
+            spellcheck="false" placeholder="…"
+            value="${escAttr(st.v)}">${esc(after)}</p>
+       <div class="q-bottom">
+         <span class="hint">Từ gốc: <b>${esc(item.h)}</b></span>
+         <span class="fb"></span>
+       </div>
+     </div>`;
+
+  const input = el.querySelector('.blank');
+  input.addEventListener('input', () => {
+    state[i].v = input.value;
+    save();
+    if (document.getElementById('auto').checked && state[i].st !== 'idle') {
+      state[i].st = 'idle';
+      paint(i);
+    }
+    refreshStats();
+  });
+  input.addEventListener('blur', () => {
+    if (document.getElementById('auto').checked && input.value.trim() !== '') check(i);
+  });
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      check(i);
+      const next = document.querySelector(`.blank[data-i="${i + 1}"]`);
+      if (next) next.focus();
+    }
+  });
+
+  paint(i);
+  return el;
+}
+
+/* =========================================================
+   PAINT (hiển thị trạng thái)
+   ========================================================= */
+function paint(i){
+  const el = document.getElementById('q' + i);
+  if (!el) return;
+  const item = FLAT[i];
+  const st = state[i];
+  const input = el.querySelector('.blank');
+  const fb = el.querySelector('.fb');
+
+  el.classList.remove('correct', 'wrong', 'revealed');
+
+  if (st.st === 'idle'){
+    fb.innerHTML = '';
+    applyFilter(el, i);
+    return;
+  }
+
+  el.classList.add(st.st);
+  if (input.value !== st.v) input.value = st.v;
+
+  if (st.st === 'correct'){
+    fb.innerHTML = `<span class="ok">✓ Chính xác!</span><span class="exp">${esc(item.e)}</span>`;
+  } else if (st.st === 'wrong'){
+    fb.innerHTML = `<span class="no">✗ Đáp án: <b>${esc(item.a)}</b></span><span class="exp">${esc(item.e)}</span>`;
+  } else {
+    fb.innerHTML = `<span class="rev">Đáp án: <b>${esc(item.a)}</b></span><span class="exp">${esc(item.e)}</span>`;
+  }
+  applyFilter(el, i);
+}
+
+function applyFilter(el, i){
+  if (filterWrong && state[i].st !== 'wrong') el.classList.add('hidden');
+  else el.classList.remove('hidden');
+}
+
+/* =========================================================
+   KIỂM TRA
+   ========================================================= */
+function check(i){
+  const item = FLAT[i];
+  const st = state[i];
+  const el = document.getElementById('q' + i);
+  if (!el) return;
+  const input = el.querySelector('.blank');
+
+  st.v = input.value;
+  const val = norm(st.v);
+  const accepted = [item.a, ...(item.alt || [])].map(norm);
+  const ok = val !== '' && accepted.includes(val);
+  st.st = ok ? 'correct' : 'wrong';
+
+  paint(i);
+  save();
+  refreshStats();
+}
+
+function checkAll(){
+  let answered = 0;
+  for (let i = 0; i < N; i++){
+    if (state[i].v.trim() !== '') answered++;
+    check(i);
+  }
+  save();
+  refreshStats();
+  toast(answered === 0
+    ? 'Bạn chưa trả lời câu nào!'
+    : `Đã chấm xong: ${state.filter(s => s.st === 'correct').length}/${N} câu đúng`);
+}
+
+function revealAll(){
+  for (let i = 0; i < N; i++){
+    state[i].st = 'revealed';
+    state[i].v  = FLAT[i].a;
+    const el = document.getElementById('q' + i);
+    if (el) el.querySelector('.blank').value = FLAT[i].a;
+    paint(i);
+  }
+  save();
+  refreshStats();
+  toast('Đã hiển thị toàn bộ đáp án 👁');
+}
+
+function resetAll(){
+  if (!confirm('Xoá toàn bộ câu trả lời và làm lại từ đầu?')) return;
+  state = FLAT.map(() => ({ v: '', st: 'idle' }));
+  filterWrong = false;
+  document.getElementById('btn-filter').classList.remove('btn-primary');
+  document.getElementById('btn-filter').classList.add('btn-ghost');
+  localStorage.removeItem(KEY);
+  render();
+  toast('Đã làm mới bài tập ↺');
+}
+
+/* =========================================================
+   THỐNG KÊ
+   ========================================================= */
+function refreshStats(){
+  const correct = state.filter(s => s.st === 'correct').length;
+  const answered = state.filter(s => s.v.trim() !== '').length;
+
+  document.getElementById('s-correct').textContent = correct;
+  document.getElementById('s-bar').style.width = (answered / N * 100) + '%';
+
+  PARTS.forEach((part, pi) => {
+    const badge = document.getElementById('pb-' + pi);
+    if (!badge) return;
+    const idxs = [];
+    FLAT.forEach((f, i) => { if (f.part === pi) idxs.push(i); });
+    const c = idxs.filter(i => state[i].st === 'correct').length;
+    const total = idxs.length;
+    badge.textContent = `${c}/${total}`;
+    badge.classList.remove('full', 'low');
+    if (c === total) badge.classList.add('full');
+    else if (c === 0) badge.classList.add('low');
+  });
+}
+
+/* =========================================================
+   LƯU TRỮ
+   ========================================================= */
+function save(){
+  try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){}
+}
+function load(){
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (!raw) return;
+    const d = JSON.parse(raw);
+    if (Array.isArray(d) && d.length === N){
+      d.forEach((x, i) => {
+        if (x && typeof x.v === 'string'){
+          state[i].v  = x.v;
+          state[i].st = (x.st === 'correct' || x.st === 'wrong') ? x.st : 'idle';
+        }
+      });
+    }
+  } catch(e){}
+}
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
+}
+
+/* =========================================================
+   SỰ KIỆN
+   ========================================================= */
+document.getElementById('btn-check').addEventListener('click', checkAll);
+document.getElementById('btn-reveal').addEventListener('click', revealAll);
+document.getElementById('btn-reset').addEventListener('click', resetAll);
+
+document.getElementById('btn-filter').addEventListener('click', function(){
+  filterWrong = !filterWrong;
+  this.classList.toggle('btn-primary', filterWrong);
+  this.classList.toggle('btn-ghost', !filterWrong);
+  this.textContent = filterWrong ? '📋 Hiện tất cả' : '🔎 Chỉ câu sai';
+  FLAT.forEach((_, i) => {
+    const el = document.getElementById('q' + i);
+    if (el) applyFilter(el, i);
+  });
+  if (filterWrong) toast('Chỉ hiển thị các câu làm sai');
+});
+
+/* =========================================================
+   CHẠY
+   ========================================================= */
+load();
+render();
+</script>
+</body>
+</html>
